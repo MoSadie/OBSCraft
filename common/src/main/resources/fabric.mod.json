@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "streamercraft-core",
+  "id": "obswscraft-core",
   "version": "${version}",
-  "name": "Streamer.craft Core",
+  "name": "OBSWSCraft Core",
   "description": "Use OBS WebSocket Server to control OBS from Minecraft.",
   "authors": [
     "MoSadie"
@@ -22,8 +22,5 @@
     "java": ">=21",
     "architectury": ">=13.0.2",
     "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

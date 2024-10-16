@@ -23,4 +23,4 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: ObeRawCraft
-            path: ./*/build/libs/obsrawcraft-*.jar
+            path: ./*/build/libs/obswscraft-*.jar

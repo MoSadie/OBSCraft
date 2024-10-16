@@ -12,11 +12,10 @@ import com.mosadie.obswscraft.actions.args.Argument;
 import com.mosadie.obswscraft.actions.args.ScoreboardWithNameArgument;
 import com.mosadie.obswscraft.actions.args.ScoreboardWithScoreArgument;
 import com.mosadie.obswscraft.actions.args.StringLiteralArgument;
+import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
 import dev.architectury.platform.Platform;
 import io.obswebsocket.community.client.OBSRemoteController;
 import net.minecraft.ChatFormatting;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ObjectiveArgument;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
@@ -34,7 +33,7 @@ import java.util.*;
 public final class ObsWsCraft {
     public static final String MOD_ID = "obswscraft";
 
-    public static final String TRANSLATION_TRIGGER = "com.mosadie.obsrawcraft.trigger";
+    public static final String TRANSLATION_TRIGGER = "com.mosadie.obswscraft.trigger";
 
     public static Gson GSON_PRETTY;
 
@@ -54,7 +53,7 @@ public final class ObsWsCraft {
         GSON_COMPRESSED = new GsonBuilder().create();
         httpClient = HttpClient.newHttpClient();
 
-        File configFile = Platform.getConfigFolder().resolve("obsrawcraft.json").toFile();
+        File configFile = Platform.getConfigFolder().resolve("obswscraft.json").toFile();
 
         if (configFile.exists()) {
             try {
@@ -90,7 +89,11 @@ public final class ObsWsCraft {
 
         refreshOBSConnections();
 
-        LOGGER.info("OBSRawCraft initialized.");
+        ClientCommandRegistrationEvent.EVENT.register((dispatcher, context) -> {
+            dispatcher.register(getCommand());
+        });
+
+        LOGGER.info("OBSWSCraft initialized.");
     }
 
     private static void closeAllOBSConnections() {
@@ -160,32 +163,32 @@ public final class ObsWsCraft {
         return false;
     }
 
-    public static LiteralArgumentBuilder<CommandSourceStack> getNeoForgeCommand() {
+    public static LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> getCommand() {
         // Create a Brigadier command that can be used in Minecraft
 
-        return Commands.literal("obswscraft")
-                .then(Commands.literal("list").executes((context -> {
+        return ClientCommandRegistrationEvent.literal("obswscraft")
+                .then(ClientCommandRegistrationEvent.literal("list").executes((context -> {
                     // List all available and ready OBS connections
-                    context.getSource().sendSystemMessage(Component.literal("[OBSWSCraft] Available OBS Connections:").withStyle(ChatFormatting.GREEN));
+                    context.getSource().arch$sendSuccess(() -> Component.literal("[OBSWSCraft] Available OBS Connections:").withStyle(ChatFormatting.GREEN), false);
                     for (String id : getAvailableOBSIds()) {
-                        context.getSource().sendSystemMessage(Component.literal("- " + id).withStyle(ChatFormatting.GRAY));
+                        context.getSource().arch$sendSuccess(() -> Component.literal("- " + id).withStyle(ChatFormatting.GRAY), false);
                     }
                     return 1;
                 })))
-                .then(Commands.literal("set_scene")
-                .then(Commands.literal("literal")
-                        .then(Commands.argument("obs_id", StringArgumentType.string())
-                                .then(Commands.argument("scene", StringArgumentType.string())
+                .then(ClientCommandRegistrationEvent.literal("set_scene")
+                .then(ClientCommandRegistrationEvent.literal("literal")
+                        .then(ClientCommandRegistrationEvent.argument("obs_id", StringArgumentType.string())
+                                .then(ClientCommandRegistrationEvent.argument("scene", StringArgumentType.string())
                                         .executes(context -> SetProgramSceneCommand(context, Argument.ArgumentType.STRING_LITERAL)))))
-                .then(Commands.literal("scoreboard")
-                        .then(Commands.argument("objective", ObjectiveArgument.objective())
-                                .then(Commands.argument("by_score", IntegerArgumentType.integer())
+                .then(ClientCommandRegistrationEvent.literal("scoreboard")
+                        .then(ClientCommandRegistrationEvent.argument("objective", ObjectiveArgument.objective())
+                                .then(ClientCommandRegistrationEvent.argument("by_score", IntegerArgumentType.integer())
                                         .executes(context -> SetProgramSceneCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE)))
-                                .then(Commands.argument("by_name", StringArgumentType.string())
+                                .then(ClientCommandRegistrationEvent.argument("by_name", StringArgumentType.string())
                                         .executes(context -> SetProgramSceneCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME))))));
     }
 
-    private static int SetProgramSceneCommand(CommandContext<CommandSourceStack> context, Argument.ArgumentType argType) {
+    private static int SetProgramSceneCommand(CommandContext<ClientCommandRegistrationEvent.ClientCommandSourceStack> context, Argument.ArgumentType argType) {
         String obsId = StringArgumentType.getString(context, "obs_id");
         Argument arg;
 
@@ -201,15 +204,15 @@ public final class ObsWsCraft {
             obs.setCurrentProgramScene(arg.processArgument(), (response) -> {
                 if (response.isSuccessful()) {
                     SetProgramSceneAction action = new SetProgramSceneAction(Collections.singletonList(arg), obsId);
-                    context.getSource().sendSystemMessage(Component.literal("[OBSWSCraft] Set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.GREEN));
-                    context.getSource().sendSystemMessage(Component.literal("[Click here to copy tellraw command]").withStyle(ChatFormatting.GOLD).withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/tellraw @s " + action.getTellRawComponent()))));
+                    context.getSource().arch$sendSuccess(() -> Component.literal("[OBSWSCraft] Set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.GREEN), false);
+                    context.getSource().arch$sendSuccess(() -> Component.literal("[Click here to copy tellraw command]").withStyle(ChatFormatting.GOLD).withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/tellraw @s " + action.getTellRawComponent()))), false);
                 } else {
-                    context.getSource().sendSystemMessage(Component.literal("[OBSWSCraft] Failed to set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.RED));
+                    context.getSource().arch$sendFailure(Component.literal("[OBSWSCraft] Failed to set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.RED));
                 }
             });
             return 1;
         } else {
-            context.getSource().sendSystemMessage(Component.literal("[OBSWSCraft] OBS " + obsId + " is not ready.").withStyle(ChatFormatting.RED));
+            context.getSource().arch$sendFailure(Component.literal("[OBSWSCraft] OBS " + obsId + " is not ready.").withStyle(ChatFormatting.RED));
             return 1;
         }
     }

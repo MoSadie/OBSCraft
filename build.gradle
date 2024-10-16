@@ -39,8 +39,7 @@ subprojects {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
 
-        api "io.obs-websocket.community:client:$rootProject.obs_ws_version"
-
+        implementation "io.obs-websocket.community:client:$rootProject.obs_ws_version"
         include "io.obs-websocket.community:client:$rootProject.obs_ws_version"
     }
 

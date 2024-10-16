@@ -35,4 +35,4 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[mixins]]
-config = "streamercraft.mixins.json"
+config = "obswscraft.mixins.json"

@@ -15,12 +15,6 @@ public final class ObsWsCraftNeoForge {
         ObsWsCraft.init();
 
         NeoForge.EVENT_BUS.addListener(this::onChatMessage);
-        NeoForge.EVENT_BUS.addListener(this::registerClientCommand);
-    }
-
-    public void registerClientCommand(RegisterClientCommandsEvent event) {
-        // Register our client command.
-        event.getDispatcher().register(ObsWsCraft.getNeoForgeCommand());
     }
 
     public void onChatMessage(ClientChatReceivedEvent event) {

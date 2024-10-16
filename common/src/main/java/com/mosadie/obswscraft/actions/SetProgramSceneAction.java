@@ -22,9 +22,9 @@ public class SetProgramSceneAction extends ObsAction {
             String scene = args.get(0).processArgument();
             obs.setCurrentProgramScene(scene, (response) -> {
                 if (response.isSuccessful()) {
-                    ObsWsCraft.LOGGER.info("[OBSRawCraft] Set scene to " + scene + " on OBS " + obsId);
+                    ObsWsCraft.LOGGER.info("[OBSWSCraft] Set scene to " + scene + " on OBS " + obsId);
                 } else {
-                    ObsWsCraft.LOGGER.info("[OBSRawCraft] Failed to set scene to " + scene + " on OBS " + obsId);
+                    ObsWsCraft.LOGGER.info("[OBSWSCraft] Failed to set scene to " + scene + " on OBS " + obsId);
                 }
             });
         }

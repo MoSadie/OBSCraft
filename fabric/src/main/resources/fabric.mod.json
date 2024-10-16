@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "streamercraft-core",
+  "id": "obswscraft",
   "version": "${version}",
-  "name": "Streamer.craft Core",
+  "name": "OBSWSCraft",
   "description": "Use OBS WebSocket Server to control OBS from Minecraft.",
   "authors": [
     "MoSadie"
