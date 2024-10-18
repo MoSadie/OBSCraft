@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.mosadie.obswscraft.mixin",
+  "package": "com.mosadie.obscraft.mixin",
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [

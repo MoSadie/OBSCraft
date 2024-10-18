@@ -1,4 +1,4 @@
-package com.mosadie.obswscraft;
+package com.mosadie.obscraft;
 
 import java.util.List;
 

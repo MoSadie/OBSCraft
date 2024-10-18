@@ -1,6 +1,6 @@
-package com.mosadie.obswscraft.actions.args;
+package com.mosadie.obscraft.actions.args;
 
-import com.mosadie.obswscraft.ObsWsCraft;
+import com.mosadie.obscraft.ObsCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.PlayerScoreEntry;
@@ -14,17 +14,19 @@ public class ScoreboardWithScoreArgument implements Argument{
 
     private final String objective;
     private final int score;
+    private final ArgumentType type = ArgumentType.SCOREBOARD_WITH_SCORE;
 
     public ScoreboardWithScoreArgument(String objective, int score) {
         this.objective = objective;
         this.score = score;
     }
+
     @Override
     public String processArgument() {
         if (Minecraft.getInstance().level != null) {
             Objective objective = Minecraft.getInstance().level.getScoreboard().getObjective(this.objective);
             if (objective == null ) {
-                ObsWsCraft.LOGGER.info("Scoreboard: Objective is null!");
+                ObsCraft.LOGGER.info("Scoreboard: Objective is null!");
                 return "";
             }
 
@@ -36,12 +38,13 @@ public class ScoreboardWithScoreArgument implements Argument{
                 }
             }
 
-            ObsWsCraft.LOGGER.info("Missing score holder for " + this.objective + " with score " + this.score);
+            ObsCraft.LOGGER.info("Missing score holder for " + this.objective + " with score " + this.score);
         } else {
-            ObsWsCraft.LOGGER.info("Scoreboard: World is null!");
+            ObsCraft.LOGGER.info("Scoreboard: World is null!");
         }
 
 
         return "";
     }
+
 }

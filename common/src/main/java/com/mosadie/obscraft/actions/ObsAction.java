@@ -1,7 +1,7 @@
-package com.mosadie.obswscraft.actions;
+package com.mosadie.obscraft.actions;
 
-import com.mosadie.obswscraft.ObsWsCraft;
-import com.mosadie.obswscraft.actions.args.Argument;
+import com.mosadie.obscraft.ObsCraft;
+import com.mosadie.obscraft.actions.args.Argument;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
@@ -27,25 +27,25 @@ public abstract class ObsAction {
     public abstract void execute();
     public String getTellRawComponent() {
         try {
-            return ObsWsCraft.GSON_COMPRESSED.toJson(new ActionTranslatableComponent(obsId));
+            return ObsCraft.GSON_COMPRESSED.toJson(new ActionTranslatableComponent(this));
         } catch (Exception e) {
-            ObsWsCraft.LOGGER.error("Error creating tellraw component for action", e);
+            ObsCraft.LOGGER.error("Error creating tellraw component for action", e);
             return "";
         }
     }
 
     public class ActionTranslatableComponent {
         public final String type = "translatable";
-        public final String translate = ObsWsCraft.TRANSLATION_TRIGGER;
+        public final String translate = ObsCraft.TRANSLATION_TRIGGER;
         public final String fallback = "";
 
         public final String[] with;
 
-        public ActionTranslatableComponent(String obsId) {
-            String[] withTmp = new String[] { obsId };
+        public ActionTranslatableComponent(ObsAction obsAction) {
+            String[] withTmp = new String[] { obsAction.obsId, obsAction.type.name() };
 
             for (Argument arg : args) {
-                withTmp = ArrayUtils.add(withTmp, ObsWsCraft.GSON_COMPRESSED.toJson(arg));
+                withTmp = ArrayUtils.add(withTmp, ObsCraft.GSON_COMPRESSED.toJson(arg));
             }
 
             this.with = withTmp;

@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'obswscraft'
+rootProject.name = 'obscraft'
 
 include 'common'
 include 'fabric'

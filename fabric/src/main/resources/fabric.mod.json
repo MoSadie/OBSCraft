@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "obswscraft",
+  "id": "obscraft",
   "version": "${version}",
-  "name": "OBSWSCraft",
+  "name": "OBSCraft",
   "description": "Use OBS WebSocket Server to control OBS from Minecraft.",
   "authors": [
     "MoSadie"
   ],
   "contact": {
-    "homepage": "https://github.com/MoSadie/OBSWSCraft",
-    "sources": "https://github.com/MoSadie/OBSWSCraft",
-    "issues": "https://github.com/MoSadie/OBSWSCraft/issues"
+    "homepage": "https://github.com/MoSadie/OBSCraft",
+    "sources": "https://github.com/MoSadie/OBSCraft",
+    "issues": "https://github.com/MoSadie/OBSCraft/issues"
   },
   "license": "GNU LGPL v3",
-  "icon": "assets/obswscaft/icon.png",
+  "icon": "assets/obscaft/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.mosadie.obswscraft.fabric.client.ObsWsCraftFabricClient"
+      "com.mosadie.obscraft.fabric.client.ObsCraftFabricClient"
     ]
   },
   "mixins": [
-    "obswscraft.mixins.json"
+    "obscraft.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.3",

@@ -1,4 +1,4 @@
-package com.mosadie.obswscraft.actions.args;
+package com.mosadie.obscraft.actions.args;
 
 public interface Argument {
     String processArgument();

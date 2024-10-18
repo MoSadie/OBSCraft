@@ -41,6 +41,15 @@ subprojects {
 
         implementation "io.obs-websocket.community:client:$rootProject.obs_ws_version"
         include "io.obs-websocket.community:client:$rootProject.obs_ws_version"
+
+        // I dislike this but it's the only way to get the websocket dependencies to be included.
+        include "org.eclipse.jetty.websocket:websocket-client:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty.websocket:websocket-common:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty.websocket:websocket-api:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty:jetty-client:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty:jetty-http:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty:jetty-util:$rootProject.eclipse_ws_version"
+        include "org.eclipse.jetty:jetty-io:$rootProject.eclipse_ws_version"
     }
 
     java {

@@ -1,1 +1,1 @@
-# OBSWSCraft
+# OBSCraft

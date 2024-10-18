@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "obswscraft-core",
+  "id": "obscraft-core",
   "version": "${version}",
-  "name": "OBSWSCraft Core",
+  "name": "OBSCraft Core",
   "description": "Use OBS WebSocket Server to control OBS from Minecraft.",
   "authors": [
     "MoSadie"
   ],
   "contact": {
-    "homepage": "https://github.com/MoSadie/OBSWSCraft",
-    "sources": "https://github.com/MoSadie/OBSWSCraft",
-    "issues": "https://github.com/MoSadie/OBSWSCraft/issues"
+    "homepage": "https://github.com/MoSadie/OBSCraft",
+    "sources": "https://github.com/MoSadie/OBSCraft",
+    "issues": "https://github.com/MoSadie/OBSCraft/issues"
   },
   "license": "GNU LGPL v3",
   "mixins": [
-    "obswscraft.mixins.json"
+    "obscraft.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.3",

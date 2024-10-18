@@ -1,18 +1,18 @@
-package com.mosadie.obswscraft.fabric.client;
+package com.mosadie.obscraft.fabric.client;
 
-import com.mosadie.obswscraft.ObsWsCraft;
+import com.mosadie.obscraft.ObsCraft;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 
-import static com.mosadie.obswscraft.ObsWsCraft.handleTranslatableContent;
+import static com.mosadie.obscraft.ObsCraft.handleTranslatableContent;
 
-public final class ObsWsCraftFabricClient implements ClientModInitializer {
+public final class ObsCraftFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
-        ObsWsCraft.init();
+        ObsCraft.init();
 
         ClientReceiveMessageEvents.ALLOW_GAME.register(this::handleGameMessage);
     }
