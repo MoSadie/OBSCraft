@@ -9,7 +9,10 @@ import java.util.List;
 public abstract class ObsAction {
 
     public enum ActionType {
-        SCENE
+        SCENE,
+        FILTER,
+        SOURCE_VISIBILITY,
+        TEXT
     }
 
     public final ActionType type;

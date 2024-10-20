@@ -21,6 +21,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.ObjectiveArgument;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -245,7 +246,11 @@ public final class ObsCraft {
                 if (response.isSuccessful()) {
                     SetProgramSceneAction action = new SetProgramSceneAction(Collections.singletonList(arg), obsId);
                     context.getSource().arch$sendSuccess(() -> Component.literal("[OBSCraft] Set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.GREEN), false);
-                    context.getSource().arch$sendSuccess(() -> Component.literal("[Click here to copy tellraw command]").withStyle(ChatFormatting.GOLD).withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/tellraw " + Minecraft.getInstance().getGameProfile().getName() + " " + action.getTellRawComponent()))), false);
+                    context.getSource().arch$sendSuccess(() -> Component.literal("[Click here to copy tellraw command]").withStyle(ChatFormatting.GOLD).withStyle(style -> {
+                        style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/tellraw " + Minecraft.getInstance().getGameProfile().getName() + " " + action.getTellRawComponent()));
+                        style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Click to copy tellraw command!")));
+                        return style;
+                    }), false);
                 } else {
                     context.getSource().arch$sendFailure(Component.literal("[OBSCraft] Failed to set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.RED));
                 }
