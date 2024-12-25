@@ -13,7 +13,7 @@
     "issues": "https://github.com/MoSadie/OBSCraft/issues"
   },
   "license": "GNU LGPL v3",
-  "icon": "assets/obscaft/icon.png",
+  "icon": "assets/obscraft/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
