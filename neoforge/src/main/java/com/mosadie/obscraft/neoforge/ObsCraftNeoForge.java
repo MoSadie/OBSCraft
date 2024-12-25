@@ -18,8 +18,8 @@ public final class ObsCraftNeoForge {
 
     public void onChatMessage(ClientChatReceivedEvent event) {
         if (event.getMessage().getContents() instanceof TranslatableContents translatableContents) {
-            ObsCraft.handleTranslatableContent(translatableContents);
-            event.setCanceled(true);
+            boolean result = ObsCraft.handleTranslatableContent(translatableContents);
+            event.setCanceled(result);
         }
     }
 }

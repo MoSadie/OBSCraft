@@ -16,6 +16,15 @@ public class Config {
         return config;
     }
 
+    public OBSConnectionInfo getConnectionById(String obsId) {
+        for (OBSConnectionInfo connection : connections) {
+            if (connection.ID.equals(obsId)) {
+                return connection;
+            }
+        }
+        return null;
+    }
+
     public static class OBSConnectionInfo {
         public String ID;
         public String host;
