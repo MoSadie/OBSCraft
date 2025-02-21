@@ -57,8 +57,8 @@ public class SetTextAction extends ObsAction {
     }
 
     public static LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> GetCommand() {
-        return ClientCommandRegistrationEvent.literal("set_text")
-                .then(ClientCommandRegistrationEvent.argument("obs_id", StringArgumentType.string())
+        return ClientCommandRegistrationEvent.literal("setText")
+                .then(ClientCommandRegistrationEvent.argument("obsId", StringArgumentType.string())
                         .then(ClientCommandRegistrationEvent.literal("source")
                                 .then(ClientCommandRegistrationEvent.literal("literal")
                                         .then(ClientCommandRegistrationEvent.argument("source", StringArgumentType.string())
@@ -67,61 +67,61 @@ public class SetTextAction extends ObsAction {
                                                                 .then(ClientCommandRegistrationEvent.argument("text", StringArgumentType.greedyString())
                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.STRING_LITERAL))))
                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                .then(ClientCommandRegistrationEvent.argument("text_objective", ObjectiveArgument.objective())
-                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                .then(ClientCommandRegistrationEvent.argument("text_score", IntegerArgumentType.integer())
+                                                                .then(ClientCommandRegistrationEvent.argument("textObjective", ObjectiveArgument.objective())
+                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                .then(ClientCommandRegistrationEvent.argument("textScore", IntegerArgumentType.integer())
                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_SCORE))))
-                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                .then(ClientCommandRegistrationEvent.argument("text_name", StringArgumentType.string())
+                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                .then(ClientCommandRegistrationEvent.argument("textName", StringArgumentType.string())
                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_NAME)))))))))
                                 .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                        .then(ClientCommandRegistrationEvent.argument("source_objective", ObjectiveArgument.objective())
-                                                .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                        .then(ClientCommandRegistrationEvent.argument("source_score", IntegerArgumentType.integer())
+                                        .then(ClientCommandRegistrationEvent.argument("sourceObjective", ObjectiveArgument.objective())
+                                                .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                        .then(ClientCommandRegistrationEvent.argument("sourceScore", IntegerArgumentType.integer())
                                                                 .then(ClientCommandRegistrationEvent.literal("text")
                                                                         .then(ClientCommandRegistrationEvent.literal("literal")
                                                                                 .then(ClientCommandRegistrationEvent.argument("text", StringArgumentType.greedyString())
                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.STRING_LITERAL))))
                                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                                .then(ClientCommandRegistrationEvent.argument("text_objective", ObjectiveArgument.objective())
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("text_score", IntegerArgumentType.integer())
+                                                                                .then(ClientCommandRegistrationEvent.argument("textObjective", ObjectiveArgument.objective())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("textScore", IntegerArgumentType.integer())
                                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_SCORE))))
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("text_name", StringArgumentType.string())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("textName", StringArgumentType.string())
                                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_NAME)))))))))
-                                                .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                        .then(ClientCommandRegistrationEvent.argument("source_name", StringArgumentType.string())
+                                                .then(ClientCommandRegistrationEvent.literal("byName")
+                                                        .then(ClientCommandRegistrationEvent.argument("sourceName", StringArgumentType.string())
                                                                 .then(ClientCommandRegistrationEvent.literal("text")
                                                                         .then(ClientCommandRegistrationEvent.literal("literal")
                                                                                 .then(ClientCommandRegistrationEvent.argument("text", StringArgumentType.greedyString())
                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.STRING_LITERAL))))
                                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                                .then(ClientCommandRegistrationEvent.argument("text_objective", ObjectiveArgument.objective())
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("text_score", IntegerArgumentType.integer())
+                                                                                .then(ClientCommandRegistrationEvent.argument("textObjective", ObjectiveArgument.objective())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("textScore", IntegerArgumentType.integer())
                                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.SCOREBOARD_WITH_SCORE))))
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("text_name", StringArgumentType.string())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("textName", StringArgumentType.string())
                                                                                                         .executes(context -> SetTextExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.SCOREBOARD_WITH_NAME)))))))))))));
     }
 
     private static int SetTextExecuteCommand(CommandContext<ClientCommandRegistrationEvent.ClientCommandSourceStack> context, Argument.ArgumentType sourceArgType, Argument.ArgumentType textArgType) {
-        String obsId = StringArgumentType.getString(context, "obs_id");
+        String obsId = StringArgumentType.getString(context, "obsId");
         Argument sourceArg;
         Argument textArg;
 
         switch (sourceArgType) {
             case STRING_LITERAL -> sourceArg = new StringLiteralArgument(StringArgumentType.getString(context, "source"));
-            case SCOREBOARD_WITH_SCORE -> sourceArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "source_objective"), IntegerArgumentType.getInteger(context, "source_score"));
-            case SCOREBOARD_WITH_NAME -> sourceArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "source_objective"), StringArgumentType.getString(context, "source_name"));
+            case SCOREBOARD_WITH_SCORE -> sourceArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "sourceObjective"), IntegerArgumentType.getInteger(context, "sourceScore"));
+            case SCOREBOARD_WITH_NAME -> sourceArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "sourceObjective"), StringArgumentType.getString(context, "sourceName"));
             default -> sourceArg = new StringLiteralArgument("");
         }
 
         switch (textArgType) {
             case STRING_LITERAL -> textArg = new StringLiteralArgument(StringArgumentType.getString(context, "text"));
-            case SCOREBOARD_WITH_SCORE -> textArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "text_objective"), IntegerArgumentType.getInteger(context, "text_score"));
-            case SCOREBOARD_WITH_NAME -> textArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "text_objective"), StringArgumentType.getString(context, "text_name"));
+            case SCOREBOARD_WITH_SCORE -> textArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "textObjective"), IntegerArgumentType.getInteger(context, "textScore"));
+            case SCOREBOARD_WITH_NAME -> textArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "textObjective"), StringArgumentType.getString(context, "textName"));
             default -> textArg = new StringLiteralArgument("");
         }
 

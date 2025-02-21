@@ -4,6 +4,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mosadie.obscraft.ObsCraft;
 import com.mosadie.obscraft.actions.args.Argument;
 import dev.architectury.event.events.client.ClientCommandRegistrationEvent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public abstract class ObsAction {
         }
     }
 
-    public class ActionTranslatableComponent {
+    public static class ActionTranslatableComponent {
         public final String type = "translatable";
         public final String translate = ObsCraft.TRANSLATION_TRIGGER;
         public final String fallback = "";
@@ -49,11 +50,15 @@ public abstract class ObsAction {
         public ActionTranslatableComponent(ObsAction obsAction) {
             String[] withTmp = new String[] { obsAction.obsId, obsAction.type.name() };
 
-            for (Argument arg : args) {
+            for (Argument arg : obsAction.args) {
                 withTmp = ArrayUtils.add(withTmp, ObsCraft.GSON_COMPRESSED.toJson(arg));
             }
 
             this.with = withTmp;
+        }
+
+        public TranslatableContents toTranslatableContents() {
+            return new TranslatableContents(ObsCraft.TRANSLATION_TRIGGER, "", with);
         }
     }
 }

@@ -54,25 +54,25 @@ public class SetProgramSceneAction extends ObsAction {
     }
 
     public static LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> GetCommand() {
-        // set_scene <obs_id> literal/scoreboard [sceneId]
-        return ClientCommandRegistrationEvent.literal("set_scene")
-                .then(ClientCommandRegistrationEvent.argument("obs_id", StringArgumentType.string())
+        // setScene <obsId> literal/scoreboard [sceneId]
+        return ClientCommandRegistrationEvent.literal("setScene")
+                .then(ClientCommandRegistrationEvent.argument("obsId", StringArgumentType.string())
                         .then(ClientCommandRegistrationEvent.literal("scene")
                                 .then(ClientCommandRegistrationEvent.literal("literal")
                                         .then(ClientCommandRegistrationEvent.argument("scene", StringArgumentType.string())
                                                 .executes(context -> SetProgramSceneExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL))))
                                 .then(ClientCommandRegistrationEvent.literal("scoreboard")
                                         .then(ClientCommandRegistrationEvent.argument("objective", ObjectiveArgument.objective())
-                                                .then(ClientCommandRegistrationEvent.literal("by_score")
+                                                .then(ClientCommandRegistrationEvent.literal("byScore")
                                                         .then(ClientCommandRegistrationEvent.argument("score", IntegerArgumentType.integer())
                                                                 .executes(context -> SetProgramSceneExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE))))
-                                                .then(ClientCommandRegistrationEvent.literal("by_name")
+                                                .then(ClientCommandRegistrationEvent.literal("byName")
                                                         .then(ClientCommandRegistrationEvent.argument("name", StringArgumentType.string())
                                                                 .executes(context -> SetProgramSceneExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME))))))));
     }
 
     private static int SetProgramSceneExecuteCommand(CommandContext<ClientCommandRegistrationEvent.ClientCommandSourceStack> context, Argument.ArgumentType argType) {
-        String obsId = StringArgumentType.getString(context, "obs_id");
+        String obsId = StringArgumentType.getString(context, "obsId");
         Argument arg;
 
         switch (argType) {

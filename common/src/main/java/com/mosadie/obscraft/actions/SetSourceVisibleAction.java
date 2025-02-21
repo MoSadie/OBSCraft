@@ -57,9 +57,9 @@ public class SetSourceVisibleAction extends ObsAction {
     }
 
     public static LiteralArgumentBuilder<ClientCommandRegistrationEvent.ClientCommandSourceStack> GetCommand() {
-        // set_source_visible <obs_id> scene literal/scoreboard [sceneId] source literal/scoreboard [sourceId] show/hide
-        return ClientCommandRegistrationEvent.literal("set_source_visible")
-                .then(ClientCommandRegistrationEvent.argument("obs_id", StringArgumentType.string())
+        // setSourceVisible <obsId> scene literal/scoreboard [sceneId] source literal/scoreboard [sourceId] show/hide
+        return ClientCommandRegistrationEvent.literal("setSourceVisible")
+                .then(ClientCommandRegistrationEvent.argument("obsId", StringArgumentType.string())
                         .then(ClientCommandRegistrationEvent.literal("scene")
                                 .then(ClientCommandRegistrationEvent.literal("literal")
                                         .then(ClientCommandRegistrationEvent.argument("scene", StringArgumentType.string())
@@ -71,23 +71,23 @@ public class SetSourceVisibleAction extends ObsAction {
                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.STRING_LITERAL, Visibility.HIDE)))))
                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                .then(ClientCommandRegistrationEvent.argument("source_objective", ObjectiveArgument.objective())
-                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                .then(ClientCommandRegistrationEvent.argument("source_score", IntegerArgumentType.integer())
+                                                                .then(ClientCommandRegistrationEvent.argument("sourceObjective", ObjectiveArgument.objective())
+                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                .then(ClientCommandRegistrationEvent.argument("sourceScore", IntegerArgumentType.integer())
                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.SHOW)))
                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.HIDE)))))
-                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                .then(ClientCommandRegistrationEvent.argument("source_name", StringArgumentType.string())
+                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                .then(ClientCommandRegistrationEvent.argument("sourceName", StringArgumentType.string())
                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Visibility.SHOW)))
                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.STRING_LITERAL, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Visibility.HIDE))))))))))
                                 .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                        .then(ClientCommandRegistrationEvent.argument("scene_objective", ObjectiveArgument.objective())
-                                                .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                        .then(ClientCommandRegistrationEvent.argument("scene_score", IntegerArgumentType.integer())
+                                        .then(ClientCommandRegistrationEvent.argument("sceneObjective", ObjectiveArgument.objective())
+                                                .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                        .then(ClientCommandRegistrationEvent.argument("sceneScore", IntegerArgumentType.integer())
                                                                 .then(ClientCommandRegistrationEvent.literal("source")
                                                                         .then(ClientCommandRegistrationEvent.literal("literal")
                                                                                 .then(ClientCommandRegistrationEvent.argument("source", StringArgumentType.string())
@@ -96,21 +96,21 @@ public class SetSourceVisibleAction extends ObsAction {
                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.STRING_LITERAL, Visibility.HIDE)))))
                                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                                .then(ClientCommandRegistrationEvent.argument("source_objective", ObjectiveArgument.objective())
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("source_score", IntegerArgumentType.integer())
+                                                                                .then(ClientCommandRegistrationEvent.argument("sourceObjective", ObjectiveArgument.objective())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("sourceScore", IntegerArgumentType.integer())
                                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.SHOW)))
                                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.HIDE)))))
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("source_name", StringArgumentType.string())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("sourceName", StringArgumentType.string())
                                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Visibility.SHOW)))
                                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Visibility.HIDE))))))))))
-                                                .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                        .then(ClientCommandRegistrationEvent.argument("scene_name", StringArgumentType.string())
+                                                .then(ClientCommandRegistrationEvent.literal("byName")
+                                                        .then(ClientCommandRegistrationEvent.argument("sceneName", StringArgumentType.string())
                                                                 .then(ClientCommandRegistrationEvent.literal("source")
                                                                         .then(ClientCommandRegistrationEvent.literal("literal")
                                                                                 .then(ClientCommandRegistrationEvent.argument("source", StringArgumentType.string())
@@ -119,15 +119,15 @@ public class SetSourceVisibleAction extends ObsAction {
                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.STRING_LITERAL, Visibility.HIDE)))))
                                                                         .then(ClientCommandRegistrationEvent.literal("scoreboard")
-                                                                                .then(ClientCommandRegistrationEvent.argument("source_objective", ObjectiveArgument.objective())
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_score")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("source_score", IntegerArgumentType.integer())
+                                                                                .then(ClientCommandRegistrationEvent.argument("sourceObjective", ObjectiveArgument.objective())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byScore")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("sourceScore", IntegerArgumentType.integer())
                                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.SHOW)))
                                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.SCOREBOARD_WITH_SCORE, Visibility.HIDE)))))
-                                                                                        .then(ClientCommandRegistrationEvent.literal("by_name")
-                                                                                                .then(ClientCommandRegistrationEvent.argument("source_name", StringArgumentType.string())
+                                                                                        .then(ClientCommandRegistrationEvent.literal("byName")
+                                                                                                .then(ClientCommandRegistrationEvent.argument("sourceName", StringArgumentType.string())
                                                                                                         .then(ClientCommandRegistrationEvent.literal("show")
                                                                                                                 .executes(context -> SetSourceVisibleExecuteCommand(context, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Argument.ArgumentType.SCOREBOARD_WITH_NAME, Visibility.SHOW)))
                                                                                                         .then(ClientCommandRegistrationEvent.literal("hide")
@@ -135,7 +135,7 @@ public class SetSourceVisibleAction extends ObsAction {
     }
 
     private static int SetSourceVisibleExecuteCommand(CommandContext<ClientCommandRegistrationEvent.ClientCommandSourceStack> context, Argument.ArgumentType sceneArgType, Argument.ArgumentType sourceArgType, Visibility visibility) {
-        String obsId = StringArgumentType.getString(context, "obs_id");
+        String obsId = StringArgumentType.getString(context, "obsId");
         Argument sceneArg;
         Argument sourceArg;
 
@@ -143,9 +143,9 @@ public class SetSourceVisibleAction extends ObsAction {
             case STRING_LITERAL ->
                     sceneArg = new StringLiteralArgument(StringArgumentType.getString(context, "scene"));
             case SCOREBOARD_WITH_SCORE ->
-                    sceneArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "scene_objective"), IntegerArgumentType.getInteger(context, "scene_score"));
+                    sceneArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "sceneObjective"), IntegerArgumentType.getInteger(context, "sceneScore"));
             case SCOREBOARD_WITH_NAME ->
-                    sceneArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "scene_objective"), StringArgumentType.getString(context, "scene_name"));
+                    sceneArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "sceneObjective"), StringArgumentType.getString(context, "sceneName"));
             default -> sceneArg = new StringLiteralArgument("");
         }
 
@@ -153,9 +153,9 @@ public class SetSourceVisibleAction extends ObsAction {
             case STRING_LITERAL ->
                     sourceArg = new StringLiteralArgument(StringArgumentType.getString(context, "source"));
             case SCOREBOARD_WITH_SCORE ->
-                    sourceArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "source_objective"), IntegerArgumentType.getInteger(context, "source_score"));
+                    sourceArg = new ScoreboardWithScoreArgument(StringArgumentType.getString(context, "sourceObjective"), IntegerArgumentType.getInteger(context, "sourceScore"));
             case SCOREBOARD_WITH_NAME ->
-                    sourceArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "source_objective"), StringArgumentType.getString(context, "source_name"));
+                    sourceArg = new ScoreboardWithNameArgument(StringArgumentType.getString(context, "sourceObjective"), StringArgumentType.getString(context, "sourceName"));
             default -> sourceArg = new StringLiteralArgument("");
         }
 
