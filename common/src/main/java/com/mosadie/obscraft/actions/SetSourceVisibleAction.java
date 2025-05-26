@@ -171,8 +171,8 @@ public class SetSourceVisibleAction extends ObsAction {
                             context.getSource().arch$sendSuccess(() -> Component.literal("[Click here to copy tellraw command]")
                             .withStyle(Style.EMPTY
                                     .withColor(ChatFormatting.GOLD)
-                                    .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/tellraw " + Minecraft.getInstance().getGameProfile().getName() + " " + action.getTellRawComponent()))
-                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("Click to copy tellraw command!")))), false);
+                                    .withClickEvent(new ClickEvent.CopyToClipboard("/tellraw " + Minecraft.getInstance().getGameProfile().getName() + " " + action.getTellRawComponent()))
+                                    .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to copy tellraw command!")))), false);
                         } else {
                             LOGGER.info("[OBSCraft] Failed to set source " + sourceArg.processArgument() + " in scene " + sceneArg.processArgument() + " to " + (visibility.isVisible() ? "visible" : "hidden") + " on OBS " + obsId);
                         }
