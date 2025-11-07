@@ -93,7 +93,7 @@ public class SetProgramSceneAction extends ObsAction {
                     context.getSource().arch$sendSuccess(() -> Component.literal("[Click here to copy tellraw command]")
                             .withStyle(Style.EMPTY
                                     .withColor(ChatFormatting.GOLD)
-                                    .withClickEvent(new ClickEvent.CopyToClipboard("/tellraw " + Minecraft.getInstance().getGameProfile().getName() + " " + action.getTellRawComponent()))
+                                    .withClickEvent(new ClickEvent.CopyToClipboard("/tellraw " + Minecraft.getInstance().getGameProfile().name() + " " + action.getTellRawComponent()))
                                     .withHoverEvent(new HoverEvent.ShowText(Component.literal("Click to copy tellraw command!")))), false);
                 } else {
                     context.getSource().arch$sendFailure(Component.literal("[OBSCraft] Failed to set scene to " + arg.processArgument() + " on OBS " + obsId).withStyle(ChatFormatting.RED));
