@@ -17,10 +17,10 @@
     "obscraft.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.3",
-    "minecraft": "~1.21.4",
+    "fabricloader": ">=0.17.3",
+    "minecraft": "~1.21.9",
     "java": ">=21",
-    "architectury": ">=15.0.3",
+    "architectury": ">=18.0.5",
     "fabric-api": "*"
   }
 }

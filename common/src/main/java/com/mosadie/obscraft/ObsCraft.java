@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,18 +34,20 @@ public final class ObsCraft {
 
     public static final String TRANSLATION_TRIGGER = "com.mosadie.obscraft.trigger";
 
+    public static final KeyMapping.Category KEY_CATEGORY = KeyMapping.Category.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "key"));
+
     // F6 - F10
-    public static final KeyMapping ACTION_KEY_1 = new KeyMapping("key.obscraft.action1", 295, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_2 = new KeyMapping("key.obscraft.action2", 296, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_3 = new KeyMapping("key.obscraft.action3", 297, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_4 = new KeyMapping("key.obscraft.action4", 298, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_5 = new KeyMapping("key.obscraft.action5", 299, "key.categories.obscraft");
+    public static final KeyMapping ACTION_KEY_1 = new KeyMapping("key.obscraft.action1", 295, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_2 = new KeyMapping("key.obscraft.action2", 296, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_3 = new KeyMapping("key.obscraft.action3", 297, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_4 = new KeyMapping("key.obscraft.action4", 298, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_5 = new KeyMapping("key.obscraft.action5", 299, KEY_CATEGORY);
 
     // Unassigned by default
-    public static final KeyMapping ACTION_KEY_6 = new KeyMapping("key.obscraft.action6", -1, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_7 = new KeyMapping("key.obscraft.action7", -1, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_8 = new KeyMapping("key.obscraft.action8", -1, "key.categories.obscraft");
-    public static final KeyMapping ACTION_KEY_9 = new KeyMapping("key.obscraft.action9", -1, "key.categories.obscraft");
+    public static final KeyMapping ACTION_KEY_6 = new KeyMapping("key.obscraft.action6", -1, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_7 = new KeyMapping("key.obscraft.action7", -1, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_8 = new KeyMapping("key.obscraft.action8", -1, KEY_CATEGORY);
+    public static final KeyMapping ACTION_KEY_9 = new KeyMapping("key.obscraft.action9", -1, KEY_CATEGORY);
 
     public static final List<KeyMapping> ACTION_KEYS = List.of(ACTION_KEY_1, ACTION_KEY_2, ACTION_KEY_3, ACTION_KEY_4, ACTION_KEY_5, ACTION_KEY_6, ACTION_KEY_7, ACTION_KEY_8, ACTION_KEY_9);
 
@@ -269,28 +272,28 @@ public final class ObsCraft {
     }
 
     private static void showConnectedToast(Config.OBSConnectionInfo info) {
-        Minecraft.getInstance().doRunTask(() -> {
+        Minecraft.getInstance().execute(() -> {
             if (Minecraft.getInstance().font != null)
                 Minecraft.getInstance().getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.NARRATOR_TOGGLE, Component.literal("[OBSCraft] Connected to OBS " + info.ID).withStyle(ChatFormatting.GREEN), Component.literal("")));
         });
     }
 
     private static void showDisconnectedToast(Config.OBSConnectionInfo info) {
-        Minecraft.getInstance().doRunTask(() -> {
+        Minecraft.getInstance().execute(() -> {
             if (Minecraft.getInstance().font != null)
                 Minecraft.getInstance().getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.NARRATOR_TOGGLE, Component.literal("[OBSCraft] Disconnected from OBS " + info.ID).withStyle(ChatFormatting.GREEN), Component.literal("Check the logs if this is unexpected. Use '/obscraft reconnect' to try again.")));
         });
     }
 
     private static void showFailedToast(Config.OBSConnectionInfo info) {
-        Minecraft.getInstance().doRunTask(() -> {
+        Minecraft.getInstance().execute(() -> {
             if (Minecraft.getInstance().font != null)
                 Minecraft.getInstance().getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.NARRATOR_TOGGLE, Component.literal("[OBSCraft] Failed to connect to OBS " + info.ID).withStyle(ChatFormatting.GREEN), Component.literal("Check the logs if this is unexpected. Use '/obscraft reconnect' to try again.")));
         });
     }
 
     private static void showSavedToast(String actionId) {
-        Minecraft.getInstance().doRunTask(() -> {
+        Minecraft.getInstance().execute(() -> {
             if (Minecraft.getInstance().font != null)
                 Minecraft.getInstance().getToastManager().addToast(new SystemToast(SystemToast.SystemToastId.NARRATOR_TOGGLE, Component.literal("[OBSCraft] Saved action with id:").withStyle(ChatFormatting.GREEN), Component.literal(actionId)));
         });
